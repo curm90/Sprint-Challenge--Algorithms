@@ -99,28 +99,43 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Set light on - True
+        self.set_light_on()
         # while light is on - True
-        # set light off - False
-        # while i can move right - True
-        # swap item - pick up first item
-        # move right - go to next index
-        # compare current item held with item at next index
-        # if current item is greater than item at current index
-        # we need to make a swap so set light on - True
-        # swap item - replace item in hand with item at current index
-        # move left
-        # swap item
-        # move right and repeat
+        while self.light_is_on():
+            # set light off - False
+            self.set_light_off()
+            # while i can move right - True
+            while self.can_move_right():
+                # swap item - pick up first item
+                self.swap_item()
+                # move right - go to next index
+                self.move_right()
+            # compare current item held with item at next index
+            # if current item is greater than item at current index
+                if self.compare_item() == 1:
+                    # we need to make a swap so set light on - True
+                    self.set_light_on()
+                    # swap item - replace item in hand with item at current index
+                    self.swap_item()
+                # move left
+                self.move_left()
+                # swap item
+                self.swap_item()
+                # move right and repeat
+                self.move_right()
 
-        # if we reach the end of the list and the light is off - False
-        # meaning no swaps were made
-        # end loop - we have our sorted list
+            # if we reach the end of the list and the light is off - False
+            # meaning no swaps were made
+            if not self.light_is_on():
+                # end loop - we have our sorted list
+                return
 
-        # if we reach the end of the loop and light is still on - True
-        # we made swaps and need to loop over again
-        # while i can move left - True
-        # move left
-        pass
+            # if we reach the end of the loop and light is still on - True
+            # we made swaps and need to loop over again
+            # while i can move left - True
+            while self.can_move_left():
+                # move left
+                self.move_left()
 
 
 if __name__ == "__main__":
